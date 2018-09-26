@@ -3,6 +3,7 @@ import './Calculator.css'
 import Button from '../components/Button'
 import Display from '../components/Display'
 
+
 const initialState = {
     displayValue: '0',
     clearDisplay: false,
@@ -27,6 +28,11 @@ export default class Calculator extends Component {
         this.setState({ ...initialState })
     }
 
+    setRaiz(operation){
+        //return Math.sqrt(n)
+        console.log(Math.sqrt(operation))
+    }
+    
     setOperation(operation) {
         if (this.state.current === 0) {
             this.setState({ operation, current: 1, clearDisplay: true })
@@ -36,6 +42,7 @@ export default class Calculator extends Component {
 
             const values = [...this.state.values]
             try {
+                // eslint-disable-next-line
                 values[0] = eval(`${values[0]} ${currentOperation} ${values[1]}`)
             } catch(e) {
                 values[0] = this.state.values[0]
@@ -78,7 +85,8 @@ export default class Calculator extends Component {
         return (
             <div className="calculator">
                 <Display value={this.state.displayValue} />
-                <Button label="AC" click={this.clearMemory} triple />
+                <Button label="AC" click={this.clearMemory} double />
+                <Button label="√" click={this.setRaiz} operation />
                 <Button label="/" click={this.setOperation} operation />
                 <Button label="7" click={this.addDigit} />
                 <Button label="8" click={this.addDigit} />
@@ -95,6 +103,12 @@ export default class Calculator extends Component {
                 <Button label="0" click={this.addDigit} double />
                 <Button label="." click={this.addDigit} />
                 <Button label="=" click={this.setOperation} operation />
+                <div className="rodape" >
+                <a target="noopener" href="https://github.com/pedroalpacheco">pedroalpacheco</a>   
+                </div>
+                
+                
+                
                 
             </div>
         )
